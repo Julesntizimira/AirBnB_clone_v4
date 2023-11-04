@@ -18,17 +18,13 @@ $(document).ready(function () {
 		}
 		$('div h4').text(text);
 	});
-	$('header').append('<div></div>')
-	$('header div').attr('id', 'api_status')
-	const design = {
-		width: '40px',
-		height: '40px',
-		background-color: '#cccccc',
-		border-radius: '50%',
-		position: 'absolute',
-		right: '30px',
-		top: '50%';
-		transform: 'translateY(-50%)';
-	}
-	$('api_status').css(design)
+	const url = 'http://0.0.0.0:5001/api/v1/status/';
+	$.getJSON(url, function(data, textstatus){
+		if (data.status === 'OK'){
+			alert(data.status)
+			$('div#api_status').addClass('available')
+		} else {
+			$('div#api_status').removeClass('available')
+		}
+	})
 });
